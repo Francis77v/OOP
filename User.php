@@ -1,8 +1,4 @@
 <?php
-
-
-
-
 class User {
     //properties
     private $conn;
@@ -12,7 +8,7 @@ class User {
 
 
     //methods
-    public function __construct($conn, $name, $age)
+    public function __construct($conn, $name = null, $age = null)
     {
         $this->conn = $conn;
         $this->name = (string) $name;
@@ -32,12 +28,53 @@ class User {
             $stmt->execute([':name' => $this->name, 
                             ':age'  =>  $this->age]);
 
-            echo "Data inserted successfully!";
-            }
+            return "Data inserted successfully!";
+        }
         catch(Exception $e) {
-            echo "Error inserting data: " . $e->getMessage();
+            return "Error inserting data: " . $e->getMessage();
         }
       
+    }
+
+    public function viewUser()
+    {
+        try{
+            //variable query
+            $sql = "SELECT * FROM users";
+
+            //stmt prepare query
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch(Exception $e) {
+            return "Error fetching data: " . $e->getMessage();
+        }
+
+    }
+
+    public function updateUser()
+    {
+        try {
+            //variable query
+            $sql = "UPDATE users SET name = :name, age = :age WHERE name =";
+
+            //stmt prepare variable for query
+            $stmt = $this->conn->prepare($sql);
+
+             //execute with the data aneeded to be inserted
+            $stmt->execute([':name' => $this->name, 
+                            ':age'  =>  $this->age]);
+
+            return "Data updated successfully!";
+
+
+        }
+        catch(Exception $e) {
+
+        }
     }
 
 
