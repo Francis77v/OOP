@@ -1,6 +1,9 @@
 <?php
+namespace Flore\Oop\App;
+use \PDO;
+use \PDOException;
 
-class dbConnect {
+class conn{
    protected $dbname = "API";
    protected $servername = "localhost";
    protected $username = "root";

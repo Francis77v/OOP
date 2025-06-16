@@ -1,4 +1,10 @@
 <?php
+
+namespace Flore\Oop\App\Model;
+use \PDO;
+use \PDOException;
+use Exception;
+
 class User {
     //properties
     private $conn;
