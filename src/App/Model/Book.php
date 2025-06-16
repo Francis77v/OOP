@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Flore\Oop\App;
+namespace Flore\Oop\App\Model;
 
 
 class Book
@@ -9,7 +9,7 @@ class Book
     protected $books = [];
     private $jsonFileName;
 
-    public function __construct(string $filename = "../books.json")
+    public function __construct(string $filename = BASE_PATH . '/exercise/books.json')
     {
         $this->jsonFileName = $filename;
         if (file_exists($this->jsonFileName)) {
@@ -34,6 +34,8 @@ class Book
     $this->books = json_decode($jsonContent, true);
     }
 
+
+    //Add book method
     public function addBook(string $title, string $author, string $date)
     {
     $this->books[] = [
@@ -47,13 +49,14 @@ class Book
     return $this;
     }
 
-
+    //view book
     public function viewBook()
     {
         $this->loadFromJson();
         return $this->books; // ✅ returns all books
     }
 
+    //borrow book
     public function borrowBook(string $title)
     {
         foreach ($this->books as &$book) {
@@ -71,6 +74,7 @@ class Book
         return "❌ Book '{$title}' not found.";
     }
 
+    //return book
     public function returnBook($title)
     {
         foreach ($this->books as &$book) {

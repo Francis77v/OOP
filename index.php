@@ -19,14 +19,19 @@ $uri = rtrim($uri, '/') ?: '/';
 if (isset($routes[$uri])) {
     
     [$controller, $method] = $routes[$uri];
+    if (class_exists($controller)){
+        $controller = new $controller;
+
+        echo $controller->$method;
+    }else {
+        http_response_code(500);
+        echo "Method {$method} not found in {$controller}";
+    }
 
     // Check if method exists and call it statically
-    if (method_exists($controller, $method)) {
-        $controller::$method();
-    } else {
-        http_response_code(500);
-        echo "❌ Method {$method} not found in {$controller}";
-    }
+    // if (method_exists($controller, $method)) {
+    //     $controller::$method();
+    // } 
 } else {
     http_response_code(404);
     echo "Page not found.";

@@ -12,14 +12,14 @@ Method: returnBook() – marks as available again
 require_once __DIR__ . '/../vendor/autoload.php'; // go up one directory to find vendor
 
 
-use Flore\Oop\App\Book;
-// use App\Car;
+// use Flore\Oop\App\Book;
+// // use App\Car;
 
-$book = new Book();
-// $car = new Car("Toyota", "Fortuner", 10);
+// $book = new Book();
+// // $car = new Car("Toyota", "Fortuner", 10);
 
-// print_r($car);
-print_r($book);
+// // print_r($car);
+// print_r($book);
 
 
 
